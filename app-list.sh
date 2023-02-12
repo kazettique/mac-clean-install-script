@@ -1,0 +1,49 @@
+brewFormulaeList=(
+  babel
+  deno
+  eslint
+  hugo
+  mas
+  node
+  nvm
+  pnpm
+  postgresql
+  postgresql@14
+  powerlevel10k
+  sass
+  sqlite
+  vercel-cli
+  yarn
+  zsh
+)
+
+brewCaskList=(
+  adguard
+  browserosaurus
+  cleanmymac
+  desume
+  evernote
+  figma
+  firefox
+  fliqlo
+  font-fira-code
+  fork
+  gifski
+  gitkraken
+  google-chrome
+  imageoptim
+  iterm2
+  keka
+  macs-fan-control
+  monitorcontrol
+  mysqlworkbench
+  notion
+  openmtp
+  postman
+  slack
+  sourcetree
+  spotify
+  thinkorswim
+  visual-studio-code
+  vlc
+)
