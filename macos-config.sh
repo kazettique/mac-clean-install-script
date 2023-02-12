@@ -260,7 +260,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
         "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
 # Autohide dock and menubar.
-#defaults write NSGlobalDomain _HIHideMenuBar -bool true
+defaults write NSGlobalDomain _HIHideMenuBar -bool true
 
 
 ##############################################################################
@@ -498,7 +498,7 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -int 3
 defaults write NSGlobalDomain com.apple.scrollwheel.scaling -float 0.6875
 
 # Trackpad: enable tap to click for this user and for the login screen
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool false
 # defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
 # defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -548,28 +548,27 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad -dict \
 # Sources:
 #     https://www.reddit.com/r/apple/comments/5rfdj6/pro_tip_significantly_improve_bluetooth_audio/
 #     https://apple.stackexchange.com/questions/40259/bluetooth-audio-problems-on-a-macbook
-for bitpool_param (
-    "Negotiated Bitpool"
-    "Negotiated Bitpool Max"
-    "Negotiated Bitpool Min"
-    "Apple Bitpool Max (editable)"
-    "Apple Bitpool Min (editable)"
-    "Apple Initial Bitpool (editable)"
-    "Apple Initial Bitpool Min (editable)"
-); do
-    defaults write com.apple.BluetoothAudioAgent "${bitpool_param}" -int 80
-done
+# for bitpool_param (
+#     "Negotiated Bitpool"
+#     "Negotiated Bitpool Max"
+#     "Negotiated Bitpool Min"
+#     "Apple Bitpool Max (editable)"
+#     "Apple Bitpool Min (editable)"
+#     "Apple Initial Bitpool (editable)"
+#     "Apple Initial Bitpool Min (editable)"
+# ); do
+#     defaults write com.apple.BluetoothAudioAgent "${bitpool_param}" -int 80
+# done
 
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
-defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
-defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
+# defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true # ! error
+# defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144 # ! error
 # Follow the keyboard focus while zoomed in
-defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
-
+# defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true # ! error
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
@@ -670,7 +669,7 @@ defaults write NSGlobalDomain CGFontRenderingFontSmoothingDisabled -bool false
 ###############################################################################
 
 # Start night shift from sunset to sunrise
-nightlight schedule start
+# nightlight schedule start
 
 
 ###############################################################################
@@ -813,8 +812,8 @@ defaults write com.apple.screensaver askForPasswordDelay -int 0
 # Documents    : `PfDo`
 # All My Files : `PfAF`
 # Other…       : `PfLo`
-defaults write com.apple.finder NewWindowTarget -string "PfHm"
-defaults write com.apple.finder NewWindowTargetPath -string "file://Users/${USER}/Downloads"
+defaults write com.apple.finder NewWindowTarget -string "PfLo"
+defaults write com.apple.finder NewWindowTargetPath -string "file://$HOME/Downloads/"
 
 # Don't show icons for hard drives, servers, and removable media on the desktop
 # defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool false
@@ -894,7 +893,7 @@ defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool false
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # After configuring preferred view style, clear all `.DS_Store` files
 # to ensure settings are applied for every directory
-sudo command find / -name ".DS_Store" -print -delete || true
+# sudo command find / -name ".DS_Store" -print -delete || true
 
 # View Options
 # ColumnShowIcons    : Show preview column
@@ -909,20 +908,20 @@ sudo command find / -name ".DS_Store" -print -delete || true
 #   ascd : Date Created
 #   logs : Size
 #   labl : Tags
-/usr/libexec/PlistBuddy \
-    -c "Delete :StandardViewOptions:ColumnViewOptions:ColumnShowIcons"    \
-    -c "Delete :StandardViewOptions:ColumnViewOptions:FontSize"           \
-    -c "Delete :StandardViewOptions:ColumnViewOptions:ShowPreview"        \
-    -c "Delete :StandardViewOptions:ColumnViewOptions:ShowIconThumbnails" \
-    -c "Delete :StandardViewOptions:ColumnViewOptions:ArrangeBy"          \
-    ~/Library/Preferences/com.apple.finder.plist || true
-/usr/libexec/PlistBuddy \
-    -c "Add :StandardViewOptions:ColumnViewOptions:ColumnShowIcons    bool    true" \
-    -c "Add :StandardViewOptions:ColumnViewOptions:FontSize           integer 11"   \
-    -c "Add :StandardViewOptions:ColumnViewOptions:ShowPreview        bool    true" \
-    -c "Add :StandardViewOptions:ColumnViewOptions:ShowIconThumbnails bool    true" \
-    -c "Add :StandardViewOptions:ColumnViewOptions:ArrangeBy          string  dnam" \
-    ~/Library/Preferences/com.apple.finder.plist
+# /usr/libexec/PlistBuddy \
+#     -c "Delete :StandardViewOptions:ListViewOptions:ColumnShowIcons"    \
+#     -c "Delete :StandardViewOptions:ListViewOptions:FontSize"           \
+#     -c "Delete :StandardViewOptions:ListViewOptions:ShowPreview"        \
+#     -c "Delete :StandardViewOptions:ListViewOptions:ShowIconThumbnails" \
+#     -c "Delete :StandardViewOptions:ListViewOptions:ArrangeBy"          \
+#     ~/Library/Preferences/com.apple.finder.plist || true
+# /usr/libexec/PlistBuddy \
+#     -c "Add :StandardViewOptions:ListViewOptions:ColumnShowIcons    bool    true" \
+#     -c "Add :StandardViewOptions:ListViewOptions:FontSize           integer 16"   \
+#     -c "Add :StandardViewOptions:ListViewOptions:ShowPreview        bool    true" \
+#     -c "Add :StandardViewOptions:ListViewOptions:ShowIconThumbnails bool    true" \
+#     -c "Add :StandardViewOptions:ListViewOptions:ArrangeBy          string  dnam" \
+#     ~/Library/Preferences/com.apple.finder.plist
 
 # Disable the warning before emptying the Trash
 # defaults write com.apple.finder WarnOnEmptyTrash -bool false
@@ -1036,11 +1035,11 @@ defaults -currentHost write com.apple.coreservices.useractivityd "ActivityReceiv
 # defaults write com.apple.dock mouse-over-hilite-stack -bool true
 
 # Set the icon size of Dock items to 36 pixels
-# defaults write com.apple.dock tilesize -int 52
+defaults write com.apple.dock tilesize -int 36
 
 # Enable magnification
-# defaults write com.apple.dock "magnification" -bool true
-# defaults write com.apple.dock "largesize" -int 90
+defaults write com.apple.dock "magnification" -bool true
+defaults write com.apple.dock "largesize" -int 44
 
 # Change minimize/maximize window effect ("scale" or "genie")
 defaults write com.apple.dock mineffect -string "genie"
@@ -1125,17 +1124,36 @@ defaults write com.apple.dock show-recents -bool false
 # 10: Put display to sleep
 # 11: Launchpad
 # 12: Notification Center
-# Top left screen corner → Start screen saver
-defaults write com.apple.dock wvous-tl-corner -int 5
+# top left
+defaults write com.apple.dock wvous-tl-corner -int 0
 defaults write com.apple.dock wvous-tl-modifier -int 0
+# top right
+defaults write com.apple.dock wvous-tr-corner -int 0
+defaults write com.apple.dock wvous-tr-modifier -int 0
+# bottom left
+defaults write com.apple.dock wvous-bl-corner -int 0
+defaults write com.apple.dock wvous-bl-modifier -int 0
+# bottom right
+defaults write com.apple.dock wvous-br-corner -int 0
+defaults write com.apple.dock wvous-br-modifier -int 0
+
+
+# setup dock position
+defaults write com.apple.dock orientation -string "left"
+
+# setup dock autohide
+defaults write com.apple.dock autohide -bool false
 
 # Remove apps I don't use from the dock.
 # for shortcut_label (
 #     "Contacts"
+#     "Calendar"
 #     "FaceTime"
 #     "Launchpad"
 #     "Mail"
 #     "Maps"
+#     "Messages"
+#     "Notes"
 #     "Photos"
 #     "Podcasts"
 #     "Reminders"
@@ -1308,10 +1326,10 @@ defaults write com.apple.Safari WebContinuousSpellCheckingEnabled -bool true
 defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool true
 
 # Disable AutoFill
-defaults write com.apple.Safari AutoFillPasswords -bool false
-defaults write com.apple.Safari AutoFillFromAddressBook -bool false
-defaults write com.apple.Safari AutoFillCreditCardData -bool false
-defaults write com.apple.Safari AutoFillMiscellaneousForms -bool false
+defaults write com.apple.Safari AutoFillPasswords -bool true
+defaults write com.apple.Safari AutoFillFromAddressBook -bool true
+defaults write com.apple.Safari AutoFillCreditCardData -bool true
+defaults write com.apple.Safari AutoFillMiscellaneousForms -bool true
 
 # Warn about fraudulent websites
 defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
@@ -1373,7 +1391,7 @@ defaults write com.apple.Safari CanPromptForPushNotifications -bool false
 # 0: Manually
 # 1: When Safari Quits
 # 2: Upon Successful Download
-defaults write com.apple.Safari DownloadsClearingPolicy -int 2
+defaults write com.apple.Safari DownloadsClearingPolicy -int 0
 
 # Clear history:
 # 1 = after one day
@@ -2240,11 +2258,10 @@ defaults write com.DanPristupov.Fork SUScheduledCheckInterval -int 604800
 # Kill affected applications                                                  #
 ###############################################################################
 
-for app (
+killApps=(
     "Activity Monitor"
     "Address Book"
     "Calendar"
-    "cfprefsd"
     "Contacts"
     "Dock"
     "Finder"
@@ -2253,11 +2270,13 @@ for app (
     "Messages"
     "Photos"
     "Safari"
-    "SystemUIServer"
-    "Transmission"
-    # Kill terminal last
     "Terminal"
-); do
-    killall "${app}" &> /dev/null || true
+)
+
+for killApp in "${killApps[@]}"
+do
+    killall "${killApp}" &> /dev/null || true
 done
 }
+
+echo "macOS config finished!"
