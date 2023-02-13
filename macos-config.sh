@@ -1,4 +1,4 @@
-# ref: https://github.com/kdeldycke/dotfiles/blob/main/macos-config.sh#L1032
+# copy config from: https://github.com/kdeldycke/dotfiles/blob/main/macos-config.sh#L1032
 # ref: https://macos-defaults.com/
 
 function setupMacOSPreference() {
