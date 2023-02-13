@@ -10,21 +10,21 @@ source app-list.sh
 
 # Check for Homebrew,
 # Install if we don't have it
-# if test ! $(which brew); then
-#   echo "Installing homebrew..."
-#   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-# fi
+if test ! $(which brew); then
+  echo "Installing homebrew..."
+  # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
 # Update homebrew recipes
 echo "Updating homebrew..."
-# brew update
+brew update
 
 echo "Installing Git..."
 brew install git
 
 echo "Git config"
-
-git config --global user.name "Woody Inuyama"
+git config --global user.name "Woody Chang"
 git config --global user.email kazettique@gmail.com
 
 echo "Installing brew formulae"
@@ -35,11 +35,12 @@ echo "Installing homebrew cask"
 # TODO: issue fix later
 # brew install caskroom/cask/brew-cask
 
-for app in "${brewCaskList[@]}"
+for brewCaskItem in "${brewCaskList[@]}"
 do
-  brew install --cask --appdir="/Applications" "$app" 
+  brew install --cask --appdir="/Applications" "$brewCaskItem"
 done
 
+# install font-fira-code, not moving into applications folder
 brew tap homebrew/cask-fonts
 brew install --cask font-fira-code
 
@@ -52,14 +53,17 @@ curl -L http://install.ohmyz.sh | sh
 # cd /Users/${USERNAME}/.oh-my-zsh/themes
 # curl https://gist.githubusercontent.com/bradp/a52fffd9cad1cd51edb7/raw/cb46de8e4c77beb7fad38c81dbddf531d9875c78/brad-muse.zsh-theme >brad-muse.zsh-theme
 
-#echo "Setting up Zsh plugins..."
-# cd ~/.oh-my-zsh/custom/plugins
-# echo "Cloning zsh-syntax-higlighting"
-# git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-# echo "Cloning zsh-completions"
-# git clone git@github.com:zsh-users/zsh-completions.git
-# echo "Cloning autosuggesstions"
-# git clone git@github.com:zsh-users/zsh-autosuggestions.git
+echo "Setting up Zsh plugins..."
+cd ~/.oh-my-zsh/custom/plugins
+echo "Cloning zsh-syntax-higlighting"
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+echo "Cloning zsh-completions"
+git clone https://github.com/zsh-users/zsh-completions.git
+echo "Cloning zsh-autosuggesstions"
+git clone https://github.com/zsh-users/zsh-autosuggestions.git
+
+echo "Copying .zshrc to home directory"
+cp .zshrc $HOME
 
 echo "Setting ZSH as shell..."
 chsh -s /bin/zsh
@@ -70,7 +74,7 @@ echo "Installing Apps with Brew Cask..."
 brew install --cask --appdir="/Applications" ${brewCaskList[@]}
 
 echo "Installing Apps from Mac App Store with mas"
-mas install ${macStoreApps[@]}
+mas install ${macAppStoreList[@]}
 
 echo "Cleaning up brew"
 brew cleanup
