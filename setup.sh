@@ -81,7 +81,7 @@ brew cleanup
 
 echo "Setuping Mac Preference"
 # calling setupMacOSPreference function
-setupMacOSPreference
+# setupMacOSPreference
 
 killall Finder
 
