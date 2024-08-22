@@ -23,9 +23,9 @@ brew update
 echo "Installing Git..."
 brew install git
 
-echo "Git config"
-git config --global user.name "Woody Chang"
-git config --global user.email kazettique@gmail.com
+# echo "Git config"
+# git config --global user.name "Woody Chang"
+# git config --global user.email kazettique@gmail.com
 
 echo "Installing brew formulae"
 brew install ${brewFormulaeList[@]}
